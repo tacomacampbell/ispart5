@@ -1,0 +1,138 @@
+body {
+    font-family: 'Quicksand', sans-serif;
+    background: linear-gradient(135deg, #c2f0c2, #e0ffe0); /* Vibrant light green gradient */
+    color: #1b1b1b;
+    text-align: center;
+    padding: 30px;
+    margin: 0;
+  }
+  
+  /* Header styling */
+  h1 {
+    font-size: 48px;
+    color: #2e7d32; /* Strong leafy green */
+    margin-bottom: 25px;
+    font-family: 'Pacifico', cursive; /* Fun reggae-style font */
+    letter-spacing: 2px;
+  }
+  
+  /* Game section */
+  #game {
+    margin-top: 50px;
+    padding: 40px;
+    background-color: #ffffff;
+    border: 5px solid #81c784; /* Soft green border */
+    border-radius: 20px;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    max-width: 700px;
+    width: 90%;
+  }
+  
+  /* Score and timer */
+  #score {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #fbc02d;
+  }
+  
+  #timer {
+    font-size: 26px;
+    color: #e53935;
+    margin-top: 10px;
+  }
+  
+  /* Lyric section */
+  #lyric {
+    font-size: 28px;
+    margin-bottom: 25px;
+    font-weight: bold;
+    color: #388e3c;
+  }
+  
+  /* Input box and button */
+  #input-box {
+    padding: 14px;
+    width: 85%;
+    font-size: 20px;
+    border: 2px solid #81c784;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  #submit-button {
+    padding: 14px 30px;
+    font-size: 20px;
+    background: linear-gradient(to right, #81c784, #66bb6a);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  #submit-button:hover {
+    background: linear-gradient(to right, #66bb6a, #43a047);
+  }
+  
+  /* Play Again button */
+  #play-again {
+    font-size: 20px;
+    padding: 14px 30px;
+    background-color: #388e3c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: none;
+    margin-top: 25px;
+  }
+  
+  #play-again:hover {
+    background-color: #2e7d32;
+  }
+  
+  /* Game Over message */
+  #game-over {
+    font-size: 28px;
+    color: #d32f2f;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  /* Footer section */
+.footer {
+    margin-top: 50px;
+    font-size: 16px;
+    color: #1b1b1b;
+    background-color: #d9fdd3; /* Soft minty green */
+    padding: 20px 0;
+  }
+  
+  .footer a {
+    color: #4caf50;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .footer a:hover {
+    color: #1b5e20;
+  }
+  
+  /* Responsive */
+  @media screen and (max-width: 768px) {
+    #game {
+      padding: 30px;
+    }
+  
+    #input-box {
+      width: 95%;
+    }
+  
+    #submit-button, #play-again {
+      width: 90%;
+    }
+  }
+  

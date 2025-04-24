@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guess That Reggae Song</title>
+  <link rel="stylesheet" href="../css/game.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+
+    #game {
+      margin-top: 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #score {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 10px;
+    }
+
+    #lyric {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    #timer {
+      font-size: 20px;
+      color: red;
+    }
+
+    #input-box {
+      padding: 10px;
+      width: 250px;
+      font-size: 18px;
+    }
+
+    #submit-button {
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    #play-again {
+      font-size: 18px;
+      padding: 10px 20px;
+      cursor: pointer;
+      display: none;
+      margin-top: 20px;
+    }
+
+    #game-over {
+      font-size: 24px;
+      color: red;
+      margin-bottom: 20px;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 16px;
+    }
+
+    .footer a {
+      color: #000;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Guess That Reggae Song</h1>
+  <div id="score">Score: 0</div>
+  <div id="game" class="hidden">
+    <div id="game-over" class="hidden">Game Over! You lose. Try Again!</div>
+    <div id="lyric"></div>
+    <div id="timer">Time: 20</div>
+    <input type="text" id="input-box" placeholder="Enter song title..." />
+    <button id="submit-button">Submit</button>
+  </div>
+  <button id="play-again" onclick="startGame()">Play Again</button>
+
+  <div class="footer center">
+    <a href="game.html">Restart</a>
+  </div>
+
+  <script>
+    const songs = [
+      { lyric: "No woman, no cry", title: "No Woman, No Cry" },
+      { lyric: "Buffalo Soldier", title: "Buffalo Soldier" },
+      { lyric: "One Love, One Heart", title: "One Love" },
+      { lyric: "Get up, stand up", title: "Get Up, Stand Up" },
+      { lyric: "Redemption song", title: "Redemption Song" },
+      { lyric: "Three little birds", title: "Three Little Birds" },
+      { lyric: "Could you be loved?", title: "Could You Be Loved" },
+      { lyric: "I shot the sheriff", title: "I Shot the Sheriff" },
+      { lyric: "Waiting in vain", title: "Waiting in Vain" },
+      { lyric: "Sweat (A La La La La Long)", title: "Sweat (A La La La La Long)" },
+      { lyric: "King Without a Crown", title: "King Without a Crown" },
+      { lyric: "Is This Love", title: "Is This Love" },
+      { lyric: "Bad boys", title: "Bad Boys" },
+      { lyric: "Tuff Gong", title: "Tuff Gong" },
+      { lyric: "Could you be loved?", title: "Could You Be Loved" },
+      { lyric: "Iron Lion Zion", title: "Iron Lion Zion" },
+      { lyric: "No woman, no cry", title: "No Woman, No Cry" },
+      { lyric: "Sun is shining", title: "Sun Is Shining" },
+      { lyric: "I don't want to wait in vain", title: "Waiting in Vain" },
+      { lyric: "Jammin'", title: "Jammin'" },
+      { lyric: "So much trouble in the world", title: "So Much Trouble in the World" },
+      { lyric: "Exodus", title: "Exodus" },
+      { lyric: "Rasta Man Vibration", title: "Rasta Man Vibration" },
+      { lyric: "One Love", title: "One Love" },
+      { lyric: "Stir It Up", title: "Stir It Up" },
+      { lyric: "Lively Up Yourself", title: "Lively Up Yourself" },
+      { lyric: "Redemption song", title: "Redemption Song" },
+      { lyric: "Roots Rock Reggae", title: "Roots Rock Reggae" },
+      { lyric: "Soul Rebel", title: "Soul Rebel" },
+      { lyric: "Turn Your Lights Down Low", title: "Turn Your Lights Down Low" },
+      { lyric: "The Emperor's New Clothes", title: "The Emperor's New Clothes" },
+      { lyric: "Satisfy My Soul", title: "Satisfy My Soul" },
+      { lyric: "Keep on Moving", title: "Keep on Moving" },
+      { lyric: "Trenchtown Rock", title: "Trenchtown Rock" },
+      { lyric: "Punky Reggae Party", title: "Punky Reggae Party" },
+      { lyric: "Duppy Conqueror", title: "Duppy Conqueror" },
+      { lyric: "Mellow Mood", title: "Mellow Mood" },
+      { lyric: "Iron Lion Zion", title: "Iron Lion Zion" },
+      { lyric: "Exodus", title: "Exodus" },
+      { lyric: "Jammin'", title: "Jammin'" },
+      { lyric: "The Way You Do the Things You Do", title: "The Way You Do the Things You Do" }
+    ];
+
+    let currentSongIndex = 0;
+    let score = 0;
+    let timer;
+    let timeRemaining = 20;
+    
+    function startGame() {
+      document.getElementById('game').classList.remove('hidden');
+      document.getElementById('play-again').classList.add('hidden');
+      document.getElementById('game-over').classList.add('hidden');
+      currentSongIndex = 0;
+      score = 0;
+      timeRemaining = 20;
+      document.getElementById('score').textContent = "Score: " + score;
+      nextSong();
+    }
+
+    function nextSong() {
+      if (currentSongIndex >= songs.length) {
+        document.getElementById('game-over').classList.remove('hidden');
+        return;
+      }
+
+      const currentSong = songs[currentSongIndex];
+      document.getElementById('lyric').textContent = currentSong.lyric;
+      document.getElementById('input-box').value = '';
+      document.getElementById('timer').textContent = "Time: " + timeRemaining;
+      startTimer();
+
+      document.getElementById('submit-button').onclick = function() {
+        const userGuess = document.getElementById('input-box').value.trim().toLowerCase();
+        if (userGuess === currentSong.title.toLowerCase()) {
+          score++;
+          document.getElementById('score').textContent = "Score: " + score;
+          currentSongIndex++;
+          timeRemaining = 20;
+          nextSong();
+        } else {
+          document.getElementById('game-over').classList.remove('hidden');
+          document.getElementById('play-again').classList.remove('hidden');
+        }
+      };
+    }
+
+    function startTimer() {
+      timer = setInterval(function() {
+        if (timeRemaining <= 0) {
+          clearInterval(timer);
+          currentSongIndex++;
+          timeRemaining = 20;
+          nextSong();
+        } else {
+          timeRemaining--;
+          document.getElementById('timer').textContent = "Time: " + timeRemaining;
+        }
+      }, 1000);
+    }
+
+    window.onload = function() {
+      startGame();
+    }
+  </script>
+</body>
+</html>
